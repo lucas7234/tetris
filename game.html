@@ -99,7 +99,15 @@
 		.buttoncontrol{display:flex; margin-top:100px;}
 
 		.control{
+			display:inline;
 			margin:0 auto;
+			padding: 10px 10px;
+		}
+
+		@media (min-width: 1500px){
+			.control{
+				display:none;
+			}
 		}
 	</style>
     </head>
@@ -107,6 +115,7 @@
     	<div class="wrapper">
 			<div class="game-text">
 				<span id="overtext">게임 종료</span>
+				<span id="finalresult" style="font-size:30px;"></span>
 				<button id="restart">다시 시작</button>
 			</div>
         	<div class="score">0</div>
@@ -163,6 +172,7 @@
 		const moveBottom = document.querySelector("#moveBottom");
 		const turnRight = document.querySelector("#turnRight");
 		const moveRight = document.querySelector("#moveRight");
+		const finalResultDisplay = document.querySelector("#finalresult");
 
 		//setting
 		const GAME_ROWS=20;
@@ -315,6 +325,7 @@
 		}
 
 		function showGameoverText(){
+			finalResultDisplay.innerHTML = "점수: "+score+"점"
 			gameText.style.display = "flex";
 		}
 
@@ -343,6 +354,8 @@
 
 		restartButton.addEventListener("click", ()=>{
 			playground.innerHTML = "";
+			score = 0;
+			scoreDisplay.innerHTML = "0";
 			gameText.style.display = "none";
 			init();
 		})
